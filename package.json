@@ -1,0 +1,66 @@
+{
+  "name": "dsh-jev-manager",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness plugin: TypeSafe Jev structured decisions as model-facing tools, plus a compaction provider that prunes stale tool output and keeps everything else verbatim.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "jev",
+    "typesafe-ai",
+    "compaction",
+    "context"
+  ],
+  "author": "任佳伟",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "main": "./lib/host.mjs",
+  "exports": {
+    ".": "./lib/host.mjs",
+    "./compaction": "./lib/compaction.js",
+    "./jev": "./lib/jev.mjs",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "files": [
+    "lib",
+    "skills",
+    "tools",
+    "cordis.patch.yml",
+    "jev-preset.patch.yml",
+    "README.md",
+    "README.en.md",
+    "MAINTAINERS.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "install-preset": "node tools/install-preset.mjs",
+    "check-preset": "node tools/install-preset.mjs --check"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-compaction-basic": "*",
+    "@deepseek-ai/dsh-session": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-compaction-basic": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# 组合包贡献的配置层。
+#
+# 只有 host 平面这一行。压缩 provider 不在这里挂载，原因是 0.2.0-rc.2 的 loader
+# 实测告诉我们的两条规则：
+#   1. 覆盖已有 id 时不能改 name —— 把 compaction-basic 换成我们的模块会被跳过：
+#      patch: name mismatch for "compaction-basic" (expected "…"), skipping
+#   2. compaction 组不是顶层条目，它嵌在 preset 行的 config.plugins 里，顶层 patch
+#      够不到：patch: entry "compaction" not found
+# 所以挂载 provider 的正解是**新增一个 preset**，由 tools/make-preset-patch.mjs 生成
+# jev-preset.patch.yml，启动时用 --patch 带上（不写你的 profile 文件）。
+
+- insert:
+    # host 平面：功能开关 + 决策/整理工具 + 技能
+    - id: jev-manager
+      name: dsh-jev-manager
