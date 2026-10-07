@@ -50,16 +50,11 @@ DSH 自带的压缩是**让模型把一段历史改写成散文摘要**（有损
 
 ### 1. 配 key
 
-| 放哪 | 怎么放 | 谁读得到 |
-|---|---|---|
-| **启动环境变量**（优先级最高） | `setx TYPESAFE_API_KEY "apikey_…"`（Windows）或 `export TYPESAFE_API_KEY=…`，然后重启 DSH | 工具 **和** 压缩后端 |
-| **凭据文件** | `~/.dsh/.credentials.yaml` 的 `refs:` 下加一行 `TYPESAFE_API_KEY: apikey_…`（文件被监听，自动热加载） | 只有工具 |
-
-压缩后端跑在隔离的 compaction realm 里，拿不到凭据接缝，**只认启动环境变量**。想省事就两处都放。
+在 DSH 的凭据管理或启动环境中配置自己的 TYPESAFE_API_KEY。不要把密钥写进插件源码或聊天记录。插件复用 DSH 的 credentials、tools 和 skills 服务；官方默认配置提供这些服务，自定义配置需要保留它们。
 
 ### 2. 装插件
 
-**桌面 app**：侧栏「插件」→ 添加插件 → 选本目录或者直接复制本项目网址。app 不允许 CLI 操作 desktop profile，所以这一步只能在界面里点。
+**桌面 app**：侧栏「插件」→ 添加插件 → 选本目录或者直接复制本项目网址。
 
 **npm CLI**：
 
@@ -83,8 +78,7 @@ DSH 自带的压缩是**让模型把一段历史改写成散文摘要**（有损
 - **桌面 app**（不给传 `--patch`）：把 `jev-preset.patch.yml` 的内容并进 `~/.dsh/profiles/desktop/cordis.patch.yml`，然后重启 DSH
 - **DSH 0.1.5**（目录式 preset）：改用 `node tools/install-preset.mjs`
 
-重启后新开会话，在预设列表里选 **`jev`**。官方四个预设一行都不改；不选它，行为与装之前完全一致。确认后端真的挂上了：
-
+重启后新开会话，在预设列表里选 **`jev`**。
     node tools/mount-report.mjs      # 绑到哪份基类、schemastery、realm 能不能拿到凭据
 
 ## 三、怎么用
