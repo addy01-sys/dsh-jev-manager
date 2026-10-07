@@ -59,14 +59,14 @@ DSH 自带的压缩是**让模型把一段历史改写成散文摘要**（有损
 
 ### 2. 装插件
 
-**桌面 app**：侧栏「插件」→ 安装外部组合包 → 选本目录。app 不允许 CLI 操作 desktop profile，所以这一步只能在界面里点。
+**桌面 app**：侧栏「插件」→ 添加插件 → 选本目录或者直接复制本项目网址。app 不允许 CLI 操作 desktop profile，所以这一步只能在界面里点。
 
 **npm CLI**：
 
     node tools/install.mjs --profile web      # 备份 → 安装 → 桥接依赖 → 核对绑定
     # 或直接： dsh plugin --profile web add <本目录>
 
-### 3. 开功能
+### 3. 开功能（在插件目录的终端里输入）
 
     node tools/features.mjs enable decision
     node tools/features.mjs enable review
